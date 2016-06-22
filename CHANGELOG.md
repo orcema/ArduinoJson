@@ -5,6 +5,7 @@ HEAD
 ----
 
 * ArduinoJson is now a header-only library (issue #199)
+* Removed class IndentedPrint
 
 v5.5.1
 ------
