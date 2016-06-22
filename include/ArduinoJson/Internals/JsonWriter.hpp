@@ -101,7 +101,7 @@ class JsonWriter {
 
     // Round correctly so that print(1.999, 2) prints as "2.00"
     JsonFloat rounding = 0.5;
-    for (uint8_t i = 0; i < digits; ++i) rounding /= 10.0;
+    for (int i = 0; i < digits; ++i) rounding /= 10.0;
 
     value += rounding;
 
@@ -137,7 +137,7 @@ class JsonWriter {
   void writeInteger(JsonUInt value) {
     char buffer[22];
 
-    uint8_t i = 0;
+    int i = 0;
     do {
       buffer[i++] = static_cast<char>(value % 10 + '0');
       value /= 10;

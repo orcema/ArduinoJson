@@ -18,9 +18,9 @@ class DynamicStringBuilder {
   DynamicStringBuilder(String &str) : _str(str) {}
 
   size_t print(const char *s) {
-    int prevSize = _str.size();
+    int prevLength = _str.length();
     _str += s;
-    return _str.size() - prevSize;
+    return _str.length() - prevLength;
   }
 
   size_t print(char c) {
