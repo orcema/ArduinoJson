@@ -18,12 +18,20 @@ static const char* superLong =
     "12345678901234567890123456789012345678901234567890123456789012345678901234"
     "5678901234567890123456789012345678901234567890123456789012345678901234567";
 
-static const JsonVariant variant = RawJson(superLong);
+static const JsonVariant jsonVariant = RawJson(superLong);
 
-TEST(SUITE, IsNotALong) { ASSERT_FALSE(variant.is<long>()); }
+TEST(SUITE, IsNotALong) {
+  ASSERT_FALSE(jsonVariant.is<long>());
+}
 
-TEST(SUITE, AsLong) { ASSERT_EQ(LONG_MAX, variant.as<long>()); }
+TEST(SUITE, AsLong) {
+  ASSERT_EQ(LONG_MAX, jsonVariant.as<long>());
+}
 
-TEST(SUITE, IsAString) { ASSERT_FALSE(variant.is<const char*>()); }
+TEST(SUITE, IsAString) {
+  ASSERT_FALSE(jsonVariant.is<const char*>());
+}
 
-TEST(SUITE, AsString) { ASSERT_STREQ(superLong, variant.as<const char*>()); }
+TEST(SUITE, AsString) {
+  ASSERT_STREQ(superLong, jsonVariant.as<const char*>());
+}

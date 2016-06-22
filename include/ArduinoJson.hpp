@@ -11,6 +11,7 @@
 #include "ArduinoJson/StaticJsonBuffer.hpp"
 
 #include "ArduinoJson/Internals/JsonParser.ipp"
+#include "ArduinoJson/Internals/JsonSerializer.ipp"
 #include "ArduinoJson/JsonArray.ipp"
 #include "ArduinoJson/JsonBuffer.ipp"
 #include "ArduinoJson/JsonObject.ipp"

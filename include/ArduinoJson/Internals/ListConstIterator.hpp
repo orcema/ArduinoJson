@@ -12,14 +12,18 @@
 namespace ArduinoJson {
 namespace Internals {
 
-// A read-only forward itertor for List<T>
+// A read-only forward iterator for List<T>
 template <typename T>
 class ListConstIterator {
  public:
   explicit ListConstIterator(const ListNode<T> *node = NULL) : _node(node) {}
 
-  const T &operator*() const { return _node->content; }
-  const T *operator->() { return &_node->content; }
+  const T &operator*() const {
+    return _node->content;
+  }
+  const T *operator->() {
+    return &_node->content;
+  }
 
   bool operator==(const ListConstIterator<T> &other) const {
     return _node == other._node;

@@ -36,6 +36,9 @@ class JsonObject;
 // - a string (const char*)
 // - a reference to a JsonArray or JsonObject
 class JsonVariant : public JsonVariantBase<JsonVariant> {
+  template <typename Writer>
+  friend void Internals::JsonSerializer<Writer>::serialize(const JsonVariant &);
+
  public:
   template <typename T>
   struct IsConstructibleFrom;
@@ -202,6 +205,17 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
   as() const {
     return asObject();
   }
+  //
+  // JsonVariant as<JsonVariant> const;
+  // const JsonVariant as<const JsonVariant> const;
+  template <typename T>
+  typename TypeTraits::EnableIf<
+      TypeTraits::IsSame<typename TypeTraits::RemoveConst<T>::type,
+                         JsonVariant>::value,
+      T>::type
+  as() const {
+    return *this;
+  }
 
   // Tells weither the variant has the specified type.
   // Returns true if the variant has type type T, false otherwise.
@@ -277,8 +291,8 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
   }
 
   // Serialize the variant to a JsonWriter
-  template <typename Print>
-  void writeTo(Internals::JsonWriter<Print> &writer) const;
+  template <typename Writer>
+  void writeTo(Writer &writer) const;
 
   // Value returned if the variant has an incompatible type
   template <typename T>

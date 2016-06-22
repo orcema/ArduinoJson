@@ -7,160 +7,42 @@
 
 #pragma once
 
-#include "../Polyfills/attributes.hpp"
-#include "../Polyfills/isInfinity.hpp"
-#include "../Polyfills/isNaN.hpp"
-#include "../Polyfills/normalize.hpp"
-#include "Encoding.hpp"
-#include "JsonFloat.hpp"
-#include "JsonInteger.hpp"
+#include "TextWriter.hpp"
 
 namespace ArduinoJson {
 namespace Internals {
 
-// Writes the JSON tokens to a Print implementation
-// This class is used by:
-// - JsonArray::writeTo()
-// - JsonObject::writeTo()
-// - JsonVariant::writeTo()
-// Its derived by PrettyJsonWriter that overrides some members to add
-// indentation.
 template <typename Print>
-class JsonWriter {
+class JsonWriter : public TextWriter<Print> {
  public:
-  explicit JsonWriter(Print &sink) : _sink(sink), _length(0) {}
-
-  // Returns the number of bytes sent to the Print implementation.
-  // This is very handy for implementations of printTo() that must return the
-  // number of bytes written.
-  size_t bytesWritten() const {
-    return _length;
-  }
+  explicit JsonWriter(Print &sink) : TextWriter<Print>(sink) {}
 
   void beginArray() {
-    writeRaw('[');
+    this->writeRaw('[');
   }
   void endArray() {
-    writeRaw(']');
+    this->writeRaw(']');
+  }
+  void writeEmptyArray() {
+    this->writeRaw("[]");
   }
 
   void beginObject() {
-    writeRaw('{');
+    this->writeRaw('{');
   }
   void endObject() {
-    writeRaw('}');
+    this->writeRaw('}');
+  }
+  void writeEmptyObject() {
+    this->writeRaw("{}");
   }
 
   void writeColon() {
-    writeRaw(':');
+    this->writeRaw(':');
   }
   void writeComma() {
-    writeRaw(',');
+    this->writeRaw(',');
   }
-
-  void writeBoolean(bool value) {
-    writeRaw(value ? "true" : "false");
-  }
-
-  void writeString(const char *value) {
-    if (!value) {
-      writeRaw("null");
-    } else {
-      writeRaw('\"');
-      while (*value) writeChar(*value++);
-      writeRaw('\"');
-    }
-  }
-
-  void writeChar(char c) {
-    char specialChar = Encoding::escapeChar(c);
-    if (specialChar) {
-      writeRaw('\\');
-      writeRaw(specialChar);
-    } else {
-      writeRaw(c);
-    }
-  }
-
-  void writeFloat(JsonFloat value, int digits = 2) {
-    if (Polyfills::isNaN(value)) return writeRaw("NaN");
-
-    if (value < 0.0) {
-      writeRaw('-');
-      value = -value;
-    }
-
-    if (Polyfills::isInfinity(value)) return writeRaw("Infinity");
-
-    short powersOf10;
-    if (value > 1000 || value < 0.001) {
-      powersOf10 = Polyfills::normalize(value);
-    } else {
-      powersOf10 = 0;
-    }
-
-    // Round correctly so that print(1.999, 2) prints as "2.00"
-    JsonFloat rounding = 0.5;
-    for (int i = 0; i < digits; ++i) rounding /= 10.0;
-
-    value += rounding;
-
-    // Extract the integer part of the value and print it
-    JsonUInt int_part = static_cast<JsonUInt>(value);
-    JsonFloat remainder = value - static_cast<JsonFloat>(int_part);
-    writeInteger(int_part);
-
-    // Print the decimal point, but only if there are digits beyond
-    if (digits > 0) {
-      writeRaw('.');
-    }
-
-    // Extract digits from the remainder one at a time
-    while (digits-- > 0) {
-      remainder *= 10.0;
-      JsonUInt toPrint = JsonUInt(remainder);
-      writeInteger(JsonUInt(remainder));
-      remainder -= static_cast<JsonFloat>(toPrint);
-    }
-
-    if (powersOf10 < 0) {
-      writeRaw("e-");
-      writeInteger(-powersOf10);
-    }
-
-    if (powersOf10 > 0) {
-      writeRaw('e');
-      writeInteger(powersOf10);
-    }
-  }
-
-  void writeInteger(JsonUInt value) {
-    char buffer[22];
-
-    int i = 0;
-    do {
-      buffer[i++] = static_cast<char>(value % 10 + '0');
-      value /= 10;
-    } while (value);
-
-    while (i > 0) {
-      writeRaw(buffer[--i]);
-    }
-  }
-
-  void writeRaw(const char *s) {
-    _length += _sink.print(s);
-  }
-  void writeRaw(char c) {
-    _length += _sink.print(c);
-  }
-
- protected:
-  Print &_sink;
-  size_t _length;
-
- private:
-  JsonWriter &operator=(const JsonWriter &);  // cannot be assigned
 };
 }
 }

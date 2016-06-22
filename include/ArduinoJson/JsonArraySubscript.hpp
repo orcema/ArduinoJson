@@ -60,8 +60,8 @@ class JsonArraySubscript : public JsonVariantBase<JsonArraySubscript> {
     return _array.is<T>(_index);
   }
 
-  template <typename Print>
-  void writeTo(Internals::JsonWriter<Print>& writer) const {
+  template <typename Writer>
+  void writeTo(Writer& writer) const {
     _array.get(_index).writeTo(writer);
   }
 

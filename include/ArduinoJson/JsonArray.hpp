@@ -170,24 +170,6 @@ class JsonArray : public Internals::JsonPrintable<JsonArray>,
     return instance;
   }
 
-  // Serialize the array to the specified JsonWriter.
-  template <typename Print>
-  void writeTo(Internals::JsonWriter<Print> &writer) const {
-    writer.beginArray();
-
-    const node_type *child = _firstNode;
-    while (child) {
-      child->content.writeTo(writer);
-
-      child = child->next;
-      if (!child) break;
-
-      writer.writeComma();
-    }
-
-    writer.endArray();
-  }
-
   // Imports a 1D array
   template <typename T, size_t N>
   bool copyFrom(T(&array)[N]) {

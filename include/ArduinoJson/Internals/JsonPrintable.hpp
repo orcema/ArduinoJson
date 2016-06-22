@@ -14,6 +14,7 @@
 #include "Prettyfier.hpp"
 #include "StaticStringBuilder.hpp"
 #include "DynamicStringBuilder.hpp"
+#include "JsonSerializer.hpp"
 
 #if ARDUINOJSON_ENABLE_STD_STREAM
 #include "StreamPrintAdapter.hpp"
@@ -32,7 +33,8 @@ class JsonPrintable {
   template <typename Print>
   size_t printTo(Print &print) const {
     JsonWriter<Print> writer(print);
-    downcast().writeTo(writer);
+    JsonSerializer<JsonWriter<Print> > serializer(writer);
+    serializer.serialize(downcast());
     return writer.bytesWritten();
   }
 

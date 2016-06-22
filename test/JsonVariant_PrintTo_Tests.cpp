@@ -21,7 +21,9 @@ class JsonVariant_PrintTo_Tests : public testing::Test {
   }
 };
 
-TEST_F(JsonVariant_PrintTo_Tests, Empty) { outputMustBe(""); }
+TEST_F(JsonVariant_PrintTo_Tests, Empty) {
+  outputMustBe("undefined");
+}
 
 TEST_F(JsonVariant_PrintTo_Tests, Null) {
   variant = static_cast<char *>(0);

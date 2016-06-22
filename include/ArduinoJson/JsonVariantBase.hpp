@@ -77,8 +77,8 @@ class JsonVariantBase : public Internals::JsonPrintable<TImpl> {
       const String &key) const;
 
   // Serialize the variant to a JsonWriter
-  template <typename Print>
-  void writeTo(Internals::JsonWriter<Print> &writer) const;
+  template <typename Writer>
+  void writeTo(Writer &writer) const;
 
  private:
   const TImpl *impl() const {
