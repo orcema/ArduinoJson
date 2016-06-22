@@ -145,7 +145,8 @@ class JsonObject : public Internals::JsonPrintable<JsonObject>,
   }
 
   // Serialize the object to the specified JsonWriter
-  void writeTo(Internals::JsonWriter& writer) const {
+  template <typename Print>
+  void writeTo(Internals::JsonWriter<Print>& writer) const {
     writer.beginObject();
 
     const node_type* node = _firstNode;

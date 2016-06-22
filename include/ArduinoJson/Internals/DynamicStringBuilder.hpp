@@ -7,20 +7,24 @@
 
 #pragma once
 
-#include "../Print.hpp"
 #include "../String.hpp"
 
 namespace ArduinoJson {
 namespace Internals {
 
 // A Print implementation that allows to write in a String
-class DynamicStringBuilder : public Print {
+class DynamicStringBuilder {
  public:
   DynamicStringBuilder(String &str) : _str(str) {}
 
-  virtual size_t write(uint8_t c) {
-    // Need to cast to char, otherwise String will print a number (issue #120)
-    _str += static_cast<char>(c);
+  size_t print(const char *s) {
+    int prevSize = _str.size();
+    _str += s;
+    return _str.size() - prevSize;
+  }
+
+  size_t print(char c) {
+    _str += c;
     return 1;
   }
 

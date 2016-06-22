@@ -42,9 +42,13 @@ class JsonArraySubscript : public JsonVariantBase<JsonArraySubscript> {
     return *this;
   }
 
-  FORCE_INLINE bool success() const { return _index < _array.size(); }
+  FORCE_INLINE bool success() const {
+    return _index < _array.size();
+  }
 
-  FORCE_INLINE operator JsonVariant() const { return _array.get(_index); }
+  FORCE_INLINE operator JsonVariant() const {
+    return _array.get(_index);
+  }
 
   template <typename T>
   FORCE_INLINE T as() const {
@@ -56,7 +60,8 @@ class JsonArraySubscript : public JsonVariantBase<JsonArraySubscript> {
     return _array.is<T>(_index);
   }
 
-  void writeTo(Internals::JsonWriter& writer) const {
+  template <typename Print>
+  void writeTo(Internals::JsonWriter<Print>& writer) const {
     _array.get(_index).writeTo(writer);
   }
 

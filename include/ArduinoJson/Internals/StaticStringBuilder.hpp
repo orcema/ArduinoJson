@@ -7,31 +7,38 @@
 
 #pragma once
 
-#include "../Print.hpp"
-
 namespace ArduinoJson {
 namespace Internals {
 
 // A Print implementation that allows to write in a char[]
-class StaticStringBuilder : public Print {
+class StaticStringBuilder {
  public:
   StaticStringBuilder(char *buf, size_t size)
-      : buffer(buf), capacity(size - 1), length(0) {
-    buffer[0] = '\0';
+      : _buffer(buf), _capacity(size - 1), _length(0) {
+    _buffer[0] = '\0';
   }
 
-  virtual size_t write(uint8_t c) {
-    if (length >= capacity) return 0;
+  size_t print(char c) {
+    if (_length >= _capacity) return 0;
 
-    buffer[length++] = c;
-    buffer[length] = '\0';
+    _buffer[_length++] = c;
+    _buffer[_length] = '\0';
     return 1;
   }
 
+  size_t print(const char *s) {
+    size_t prevLength = _length;
+    while (_length < _capacity && *s) {
+      _buffer[_length++] = *s++;
+    }
+    _buffer[_length] = '\0';
+    return _length - prevLength;
+  }
+
  private:
-  char *buffer;
-  size_t capacity;
-  size_t length;
+  char *_buffer;
+  size_t _capacity;
+  size_t _length;
 };
 }
 }

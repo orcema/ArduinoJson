@@ -277,7 +277,8 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
   }
 
   // Serialize the variant to a JsonWriter
-  void writeTo(Internals::JsonWriter &writer) const;
+  template <typename Print>
+  void writeTo(Internals::JsonWriter<Print> &writer) const;
 
   // Value returned if the variant has an incompatible type
   template <typename T>

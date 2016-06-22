@@ -16,21 +16,31 @@ class StringBuilderTests : public testing::Test {
     _stringBuilder = new StaticStringBuilder(_buffer, sizeof(_buffer));
   }
 
-  virtual void TearDown() { delete _stringBuilder; }
+  virtual void TearDown() {
+    delete _stringBuilder;
+  }
 
-  void print(const char *value) { _returnValue = _stringBuilder->print(value); }
+  void print(const char *value) {
+    _returnValue = _stringBuilder->print(value);
+  }
 
-  void outputMustBe(const char *expected) { EXPECT_STREQ(expected, _buffer); }
+  void outputMustBe(const char *expected) {
+    EXPECT_STREQ(expected, _buffer);
+  }
 
-  void resultMustBe(size_t expected) { EXPECT_EQ(expected, _returnValue); }
+  void resultMustBe(size_t expected) {
+    EXPECT_EQ(expected, _returnValue);
+  }
 
  private:
   char _buffer[20];
-  Print *_stringBuilder;
+  StaticStringBuilder *_stringBuilder;
   size_t _returnValue;
 };
 
-TEST_F(StringBuilderTests, InitialState) { outputMustBe(""); }
+TEST_F(StringBuilderTests, InitialState) {
+  outputMustBe("");
+}
 
 TEST_F(StringBuilderTests, OverCapacity) {
   print("ABCDEFGHIJKLMNOPQRSTUVWXYZ");

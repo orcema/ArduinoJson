@@ -16,7 +16,7 @@ class JsonWriter_WriteString_Tests : public testing::Test {
  protected:
   void whenInputIs(const char *input) {
     StaticStringBuilder sb(buffer, sizeof(buffer));
-    JsonWriter writer(sb);
+    JsonWriter<StaticStringBuilder> writer(sb);
     writer.writeString(input);
     returnValue = writer.bytesWritten();
   }

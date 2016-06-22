@@ -133,7 +133,8 @@ inline bool JsonVariant::isFloat() const {
   return *end == '\0' && errno == 0 && !is<long>();
 }
 
-inline void JsonVariant::writeTo(Internals::JsonWriter &writer) const {
+template <typename Print>
+inline void JsonVariant::writeTo(Internals::JsonWriter<Print> &writer) const {
   using namespace Internals;
   switch (_type) {
     case JSON_UNDEFINED:

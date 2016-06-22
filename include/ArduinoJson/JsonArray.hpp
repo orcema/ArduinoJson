@@ -171,7 +171,8 @@ class JsonArray : public Internals::JsonPrintable<JsonArray>,
   }
 
   // Serialize the array to the specified JsonWriter.
-  void writeTo(Internals::JsonWriter &writer) const {
+  template <typename Print>
+  void writeTo(Internals::JsonWriter<Print> &writer) const {
     writer.beginArray();
 
     const node_type *child = _firstNode;

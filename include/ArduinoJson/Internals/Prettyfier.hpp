@@ -13,16 +13,25 @@ namespace ArduinoJson {
 namespace Internals {
 
 // Converts a compact JSON string into an indented one.
-class Prettyfier : public Print {
+template <typename Print>
+class Prettyfier {
  public:
-  explicit Prettyfier(IndentedPrint& p) : _sink(p) {
+  explicit Prettyfier(IndentedPrint<Print>& p) : _sink(p) {
     _previousChar = 0;
     _inString = false;
   }
 
-  virtual size_t write(uint8_t c) {
+  size_t print(char c) {
     size_t n = _inString ? handleStringChar(c) : handleMarkupChar(c);
     _previousChar = c;
+    return n;
+  }
+
+  size_t print(const char* s) {
+    size_t n = 0;
+    while (*s) {
+      n += print(*s++);
+    }
     return n;
   }
 
@@ -33,15 +42,15 @@ class Prettyfier : public Print {
     return _previousChar == '{' || _previousChar == '[';
   }
 
-  size_t handleStringChar(uint8_t c) {
+  size_t handleStringChar(char c) {
     bool isQuote = c == '"' && _previousChar != '\\';
 
     if (isQuote) _inString = false;
 
-    return _sink.write(c);
+    return _sink.print(c);
   }
 
-  size_t handleMarkupChar(uint8_t c) {
+  size_t handleMarkupChar(char c) {
     switch (c) {
       case '{':
       case '[':
@@ -66,46 +75,46 @@ class Prettyfier : public Print {
   }
 
   size_t writeBlockClose(uint8_t c) {
-    return unindentIfNeeded() + _sink.write(c);
+    return unindentIfNeeded() + _sink.print(c);
   }
 
   size_t writeBlockOpen(uint8_t c) {
-    return indentIfNeeded() + _sink.write(c);
+    return indentIfNeeded() + _sink.print(c);
   }
 
   size_t writeColon() {
-    return _sink.write(':') + _sink.write(' ');
+    return _sink.print(": ");
   }
 
   size_t writeComma() {
-    return _sink.write(',') + _sink.println();
+    return _sink.print(",\r\n");
   }
 
   size_t writeQuoteOpen() {
     _inString = true;
-    return indentIfNeeded() + _sink.write('"');
+    return indentIfNeeded() + _sink.print('"');
   }
 
   size_t writeNormalChar(uint8_t c) {
-    return indentIfNeeded() + _sink.write(c);
+    return indentIfNeeded() + _sink.print(c);
   }
 
   size_t indentIfNeeded() {
     if (!inEmptyBlock()) return 0;
 
     _sink.indent();
-    return _sink.println();
+    return _sink.print("\r\n");
   }
 
   size_t unindentIfNeeded() {
     if (inEmptyBlock()) return 0;
 
     _sink.unindent();
-    return _sink.println();
+    return _sink.print("\r\n");
   }
 
   uint8_t _previousChar;
-  IndentedPrint& _sink;
+  IndentedPrint<Print>& _sink;
   bool _inString;
 };
 }

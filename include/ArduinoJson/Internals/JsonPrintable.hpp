@@ -29,8 +29,9 @@ namespace Internals {
 template <typename T>
 class JsonPrintable {
  public:
+  template <typename Print>
   size_t printTo(Print &print) const {
-    JsonWriter writer(print);
+    JsonWriter<Print> writer(print);
     downcast().writeTo(writer);
     return writer.bytesWritten();
   }
@@ -53,8 +54,9 @@ class JsonPrintable {
     return printTo(sb);
   }
 
-  size_t prettyPrintTo(IndentedPrint &print) const {
-    Prettyfier p(print);
+  template <typename Print>
+  size_t prettyPrintTo(IndentedPrint<Print> &print) const {
+    Prettyfier<Print> p(print);
     return printTo(p);
   }
 
@@ -63,8 +65,9 @@ class JsonPrintable {
     return prettyPrintTo(sb);
   }
 
+  template <typename Print>
   size_t prettyPrintTo(Print &print) const {
-    IndentedPrint indentedPrint = IndentedPrint(print);
+    IndentedPrint<Print> indentedPrint = IndentedPrint<Print>(print);
     return prettyPrintTo(indentedPrint);
   }
 
@@ -84,7 +87,9 @@ class JsonPrintable {
   }
 
  private:
-  const T &downcast() const { return *static_cast<const T *>(this); }
+  const T &downcast() const {
+    return *static_cast<const T *>(this);
+  }
 };
 
 #if ARDUINOJSON_ENABLE_STD_STREAM
