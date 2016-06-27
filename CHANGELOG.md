@@ -4,9 +4,17 @@ ArduinoJson: change log
 HEAD
 ----
 
-* ArduinoJson is now a header-only library (issue #199)
 * Removed class IndentedPrint
 
+v5.6.1
+------
+
+* Added missing `#pragma once` (issue #310)
+
+v5.6.0
+------
+
+* ArduinoJson is now a header-only library (issue #199)
 v5.5.1
 ------
 
