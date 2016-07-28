@@ -7,8 +7,9 @@
 
 #pragma once
 
-#include "Polyfills/attributes.hpp"
+#include "Internals/JsonVariantAs.hpp"
 #include "JsonObjectKey.hpp"
+#include "Polyfills/attributes.hpp"
 
 namespace ArduinoJson {
 
@@ -20,6 +21,7 @@ class JsonObjectSubscript;
 template <typename TImpl>
 class JsonVariantBase : public Internals::JsonPrintable<TImpl> {
  public:
+  // DEPRECATED: use as<char*>() instead
   FORCE_INLINE const char *asString() const {
     return as<const char *>();
   }
@@ -31,6 +33,8 @@ class JsonVariantBase : public Internals::JsonPrintable<TImpl> {
   FORCE_INLINE operator JsonArray &() const {
     return as<JsonArray &>();
   }
+
+  // DEPRECATED: use as<JsonArray>() instead
   FORCE_INLINE JsonArray &asArray() const {
     return as<JsonArray &>();
   }
@@ -41,6 +45,8 @@ class JsonVariantBase : public Internals::JsonPrintable<TImpl> {
   FORCE_INLINE operator JsonObject &() const {
     return as<JsonObject &>();
   }
+
+  // DEPRECATED: use as<JsonObject>() instead
   FORCE_INLINE JsonObject &asObject() const {
     return as<JsonObject &>();
   }
@@ -51,7 +57,7 @@ class JsonVariantBase : public Internals::JsonPrintable<TImpl> {
   }
 
   template <typename T>
-  FORCE_INLINE const T as() const {
+  FORCE_INLINE const typename Internals::JsonVariantAs<T>::type as() const {
     return impl()->template as<T>();
   }
 
