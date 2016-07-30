@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_STREAMPRINTADAPTER_HPP
+#define __ARDUINOJSON_STREAMPRINTADAPTER_HPP
 
 #include "../Configuration.hpp"
 
@@ -37,3 +38,5 @@ class StreamPrintAdapter : public Print {
 }
 
 #endif  // ARDUINOJSON_ENABLE_STD_STREAM
+
+#endif  // __ARDUINOJSON_STREAMPRINTADAPTER_HPP

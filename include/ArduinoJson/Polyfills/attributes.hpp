@@ -7,10 +7,13 @@
 
 #pragma once
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER)
 #define FORCE_INLINE __forceinline
 #define NO_INLINE __declspec(noinline)
-#else
+#elif defined(__GNUG__)
 #define FORCE_INLINE __attribute__((always_inline))
 #define NO_INLINE __attribute__((noinline))
+#else
+#define FORCE_INLINE
+#define NO_INLINE
 #endif

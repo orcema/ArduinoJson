@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_ISFLOATINGPOINT_HPP
+#define __ARDUINOJSON_ISFLOATINGPOINT_HPP
 
 #include "IsSame.hpp"
 
@@ -19,3 +20,5 @@ struct IsFloatingPoint {
 };
 }
 }
+
+#endif  // __ARDUINOJSON_ISFLOATINGPOINT_HPP

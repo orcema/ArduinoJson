@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_JSONVARIANTCONTENT_HPP
+#define __ARDUINOJSON_JSONVARIANTCONTENT_HPP
 
 #include "JsonFloat.hpp"
 #include "JsonInteger.hpp"
@@ -28,3 +29,5 @@ union JsonVariantContent {
 };
 }
 }
+
+#endif  // __ARDUINOJSON_JSONVARIANTCONTENT_HPP

@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_STATICSTRINGBUILDER_HPP
+#define __ARDUINOJSON_STATICSTRINGBUILDER_HPP
 
 #include "../Print.hpp"
 
@@ -35,3 +36,5 @@ class StaticStringBuilder : public Print {
 };
 }
 }
+
+#endif  // __ARDUINOJSON_STATICSTRINGBUILDER_HPP

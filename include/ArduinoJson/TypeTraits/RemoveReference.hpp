@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_REMOVEREFERENCE_HPP
+#define __ARDUINOJSON_REMOVEREFERENCE_HPP
 
 namespace ArduinoJson {
 namespace TypeTraits {
@@ -21,3 +22,5 @@ struct RemoveReference<T&> {
 };
 }
 }
+
+#endif  // __ARDUINOJSON_REMOVEREFERENCE_HPP

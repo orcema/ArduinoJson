@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_ISINTEGRAL_HPP
+#define __ARDUINOJSON_ISINTEGRAL_HPP
 
 #include "../Configuration.hpp"
 #include "IsSame.hpp"
@@ -24,3 +25,5 @@ struct IsIntegral {
 };
 }
 }
+
+#endif  // __ARDUINOJSON_ISINTEGRAL_HPP

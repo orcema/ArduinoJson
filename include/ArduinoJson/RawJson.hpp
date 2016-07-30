@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_RAWJSON_HPP
+#define __ARDUINOJSON_RAWJSON_HPP
 
 namespace ArduinoJson {
 
@@ -13,9 +14,13 @@ namespace ArduinoJson {
 class RawJson {
  public:
   explicit RawJson(const char* str) : _str(str) {}
-  operator const char*() const { return _str; }
+  operator const char*() const {
+    return _str;
+  }
 
  private:
   const char* _str;
 };
 }
+
+#endif  // __ARDUINOJSON_RAWJSON_HPP

@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_MATH_HPP
+#define __ARDUINOJSON_MATH_HPP
 
 // If Visual Studo <= 2012
 #if defined(_MSC_VER) && _MSC_VER <= 1700
@@ -109,3 +110,5 @@ inline bool isInfinity<float>(float x) {
 }
 }
 #endif
+
+#endif  // __ARDUINOJSON_MATH_HPP

@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_JSONBUFFER_HPP
+#define __ARDUINOJSON_JSONBUFFER_HPP
 
 #include <stddef.h>  // for size_t
 #include <stdint.h>  // for uint8_t
@@ -117,7 +118,9 @@ class JsonBuffer {
   char *strdup(const char *src) {
     return src ? strdup(src, strlen(src)) : NULL;
   }
-  char *strdup(const String &src) { return strdup(src.c_str(), src.length()); }
+  char *strdup(const String &src) {
+    return strdup(src.c_str(), src.length());
+  }
 
   // Allocates n bytes in the JsonBuffer.
   // Return a pointer to the allocated memory or NULL if allocation fails.
@@ -161,3 +164,5 @@ class JsonBuffer {
 #pragma GCC diagnostic pop
 #endif
 #endif
+
+#endif  // __ARDUINOJSON_JSONBUFFER_HPP

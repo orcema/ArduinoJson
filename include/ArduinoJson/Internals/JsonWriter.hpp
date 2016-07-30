@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_JSONWRITER_HPP
+#define __ARDUINOJSON_JSONWRITER_HPP
 
 #include "../Polyfills/attributes.hpp"
 #include "../Polyfills/math.hpp"
@@ -182,3 +183,5 @@ class JsonWriter {
 };
 }
 }
+
+#endif __ARDUINOJSON_JSONWRITER_HPP

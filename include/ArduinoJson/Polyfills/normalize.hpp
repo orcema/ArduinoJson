@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_NORMALIZE_HPP
+#define __ARDUINOJSON_NORMALIZE_HPP
 
 namespace ArduinoJson {
 namespace Polyfills {
@@ -45,3 +46,5 @@ short normalize(T& value) {
 #endif
 }
 }
+
+#endif  // __ARDUINOJSON_NORMALIZE_HPP

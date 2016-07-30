@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_JSONVARIANTBASE_HPP
+#define __ARDUINOJSON_JSONVARIANTBASE_HPP
 
 #include "Internals/JsonVariantAs.hpp"
 #include "JsonObjectKey.hpp"
@@ -151,3 +152,5 @@ inline bool operator>(TComparand left, const JsonVariantBase<TImpl> &right) {
   return left > right.template as<TComparand>();
 }
 }
+
+#endif __ARDUINOJSON_JSONVARIANTBASE_HPP

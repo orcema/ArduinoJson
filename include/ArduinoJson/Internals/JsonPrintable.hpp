@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_JSONPRINTABLE_HPP
+#define __ARDUINOJSON_JSONPRINTABLE_HPP
 
 #include "../Configuration.hpp"
 #include "DummyPrint.hpp"
@@ -84,7 +85,9 @@ class JsonPrintable {
   }
 
  private:
-  const T &downcast() const { return *static_cast<const T *>(this); }
+  const T &downcast() const {
+    return *static_cast<const T *>(this);
+  }
 };
 
 #if ARDUINOJSON_ENABLE_STD_STREAM
@@ -95,3 +98,5 @@ inline std::ostream &operator<<(std::ostream &os, const JsonPrintable<T> &v) {
 #endif
 }
 }
+
+#endif __ARDUINOJSON_JSONPRINTABLE_HPP

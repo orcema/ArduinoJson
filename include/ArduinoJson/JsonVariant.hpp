@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_JSONVARIANT_HPP
+#define __ARDUINOJSON_JSONVARIANT_HPP
 
 #include <stddef.h>
 #include <stdint.h>  // for uint8_t
@@ -365,3 +366,5 @@ struct JsonVariant::IsConstructibleFrom {
       TypeTraits::IsSame<T, const JsonVariant &>::value;
 };
 }
+
+#endif  // __ARDUINOJSON_JSONVARIANT_HPP

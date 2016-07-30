@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_JSONVARIANTAS_HPP
+#define __ARDUINOJSON_JSONVARIANTAS_HPP
 
 namespace ArduinoJson {
 namespace Internals {
@@ -43,3 +44,5 @@ struct JsonVariantAs<const JsonObject> {
 };
 }
 }
+
+#endif  // __ARDUINOJSON_JSONVARIANTAS_HPP

@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_JSONVARIANTTYPE_HPP
+#define __ARDUINOJSON_JSONVARIANTTYPE_HPP
 
 namespace ArduinoJson {
 class JsonArray;
@@ -37,3 +38,5 @@ enum JsonVariantType {
 };
 }
 }
+
+#endif  // __ARDUINOJSON_JSONVARIANTTYPE_HPP

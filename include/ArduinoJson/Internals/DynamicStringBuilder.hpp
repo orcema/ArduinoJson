@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_DYNAMICSTRINGBUILDER_HPP
+#define __ARDUINOJSON_DYNAMICSTRINGBUILDER_HPP
 
 #include "../Print.hpp"
 #include "../String.hpp"
@@ -31,3 +32,5 @@ class DynamicStringBuilder : public Print {
 };
 }
 }
+
+#endif  // __ARDUINOJSON_DYNAMICSTRINGBUILDER_HPP

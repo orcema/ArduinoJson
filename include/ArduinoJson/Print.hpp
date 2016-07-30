@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_PRINT_HPP
+#define __ARDUINOJSON_PRINT_HPP
 
 #ifndef ARDUINO
 
@@ -28,7 +29,9 @@ class Print {
     return n;
   }
 
-  size_t println() { return write('\r') + write('\n'); }
+  size_t println() {
+    return write('\r') + write('\n');
+  }
 };
 }
 
@@ -37,3 +40,5 @@ class Print {
 #include <Print.h>
 
 #endif
+
+#endif  // __ARDUINOJSON_PRINT_HPP

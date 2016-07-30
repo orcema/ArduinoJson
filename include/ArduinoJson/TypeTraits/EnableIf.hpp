@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_ENABLEIF_HPP
+#define __ARDUINOJSON_ENABLEIF_HPP
 
 namespace ArduinoJson {
 namespace TypeTraits {
@@ -20,3 +21,5 @@ struct EnableIf<true, T> {
 };
 }
 }
+
+#endif  // __ARDUINOJSON_ENABLEIF_HPP

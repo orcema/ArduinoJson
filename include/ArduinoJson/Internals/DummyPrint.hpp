@@ -5,7 +5,8 @@
 // https://github.com/bblanchon/ArduinoJson
 // If you like this project, please add a star!
 
-#pragma once
+#ifndef __ARDUINOJSON_DUMMYPRINT_HPP
+#define __ARDUINOJSON_DUMMYPRINT_HPP
 
 #include "../Print.hpp"
 
@@ -15,7 +16,11 @@ namespace Internals {
 // A dummy Print implementation used in JsonPrintable::measureLength()
 class DummyPrint : public Print {
  public:
-  virtual size_t write(uint8_t) { return 1; }
+  virtual size_t write(uint8_t) {
+    return 1;
+  }
 };
 }
 }
+
+#endif  // __ARDUINOJSON_DUMMYPRINT_HPP
