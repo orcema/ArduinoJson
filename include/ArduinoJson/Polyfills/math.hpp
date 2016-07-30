@@ -9,7 +9,7 @@
 #define __ARDUINOJSON_MATH_HPP
 
 // If Visual Studo <= 2012
-#if defined(_MSC_VER) && _MSC_VER <= 1700
+#if defined(_MSC_VER) && _MSC_VER <= 1700 || defined(__BORLANDC__)
 
 #include <float.h>
 

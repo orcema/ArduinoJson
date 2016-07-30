@@ -8,6 +8,8 @@
 #ifndef __ARDUINOJSON_NORMALIZE_HPP
 #define __ARDUINOJSON_NORMALIZE_HPP
 
+#include <math.h>
+
 namespace ArduinoJson {
 namespace Polyfills {
 
