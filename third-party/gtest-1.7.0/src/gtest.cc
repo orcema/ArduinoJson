@@ -1783,7 +1783,12 @@ static const char* const kReservedTestCaseAttributes[] = {
 
 template <int kSize>
 std::vector<std::string> ArrayAsVector(const char* const (&array)[kSize]) {
-  return std::vector<std::string>(array, array + kSize);
+  // return std::vector<std::string>(array, array + kSize);
+  std::vector<std::string> result;
+  for (int i=0; i<kSize; ++i) {
+    result.push_back(array[i]);
+  }
+  return result;
 }
 
 static std::vector<std::string> GetReservedAttributesForElement(
@@ -3267,6 +3272,11 @@ void XmlUnitTestResultPrinter::OutputXmlAttribute(
     const std::string& element_name,
     const std::string& name,
     const std::string& value) {
+ 
+
+  std::vector<std::string> GetReservedAttributesForElement(
+    const std::string&);
+
   const std::vector<std::string>& allowed_names =
       GetReservedAttributesForElement(element_name);
 

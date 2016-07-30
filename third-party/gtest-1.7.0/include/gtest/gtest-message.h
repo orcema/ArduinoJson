@@ -127,7 +127,7 @@ class GTEST_API_ Message {
     // from the global namespace.  With this using declaration,
     // overloads of << defined in the global namespace and those
     // visible via Koenig lookup are both exposed in this function.
-    using ::operator <<;
+   // using ::operator <<;
     *ss_ << val;
     return *this;
   }
@@ -227,6 +227,13 @@ class GTEST_API_ Message {
   // from implementing the assignment operator.
   void operator=(const Message&);
 };
+
+/*template <>
+inline Message& Message::operator << <std::string>(const std::string& val) {
+  using ::operator <<;
+  *ss_ << val.c_str();
+  return *this;
+}*/
 
 // Streams a Message to an ostream.
 inline std::ostream& operator <<(std::ostream& os, const Message& sb) {
